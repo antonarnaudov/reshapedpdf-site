@@ -1,0 +1,6 @@
+node_modules/
+# the editor itself, assembled by scripts/sync-app.sh from the app repo — built,
+# never committed, so this repo stays a site repo
+app/
+.DS_Store
+.vercel/

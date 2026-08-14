@@ -1,0 +1,10 @@
+{
+  "name": "reshapedpdf-site",
+  "private": true,
+  "description": "Landing page for ReshapedPDF — static, dependency-free, deploys anywhere.",
+  "scripts": {
+    "dev": "python3 -m http.server 4173",
+    "og": "node scripts/render-og.mjs",
+    "app": "./scripts/sync-app.sh"
+  }
+}
