@@ -240,7 +240,7 @@
   </details>
 
   <p class="note">
-    Or use the <a href="./app/" style="color:var(--ember)">web app</a> — same editor, zero install.<br />
+    <span id="webapp" hidden>Or use the <a href="/app/" style="color:var(--ember)">web app</a> — same editor, zero install.<br /></span>
     <strong>These builds are not code-signed yet.</strong> That means your system will
     stop you the first time, and here is exactly how to get past it.<br />
     <b>macOS 15 (Sequoia) and newer</b> — open it once, let it be blocked, then
@@ -295,6 +295,13 @@
     document.getElementById('pick-sub').textContent = picks.sub
     box.hidden = false
   })()
+</script>
+<script>
+  // The browser editor is assembled into /app by scripts/sync-app.sh. If this
+  // deployment does not have it, say nothing rather than offer a dead link.
+  fetch('/app/index.html', { method: 'HEAD' })
+    .then((r) => { if (r.ok) document.getElementById('webapp').hidden = false })
+    .catch(() => {})
 </script>
 </body>
 </html>
