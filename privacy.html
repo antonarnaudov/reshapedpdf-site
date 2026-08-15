@@ -53,7 +53,7 @@
   <h2>The desktop app</h2>
   <p>
     Everything happens locally. The app makes no network request of its own — not on launch, not
-    on export, not ever — with the two exceptions below, both of which you start deliberately.
+    on export, not ever — with the three exceptions below, each of which you start deliberately.
   </p>
 
   <h2>The web app</h2>
@@ -63,7 +63,7 @@
     discards everything.
   </p>
 
-  <h2>The two times anything leaves your machine</h2>
+  <h2>The three times anything leaves your machine</h2>
   <ul>
     <li>
       <b>An AI model you connect.</b> The AI tools are bring-your-own-model. If you point the app
@@ -76,12 +76,20 @@
       <b>Checking for a new version, if you ask it to.</b> Release downloads are hosted on GitHub;
       opening that page is an ordinary visit to GitHub and subject to their privacy policy.
     </li>
+    <li>
+      <b>The list of models, when you open the Ollama setup panel.</b> It fetches the public
+      catalogue of vision models from <code>ollama.com</code> so it can show you what is worth
+      installing and how big each one is. No part of your document is involved — it is the same
+      page anyone can open in a browser — and the panel says <em>live from ollama.com</em> above
+      the list, so it is never happening invisibly. The result is cached on your device for a day.
+      Pick any other provider and this request is not made at all.
+    </li>
   </ul>
 
   <h2>What is stored on your device</h2>
   <p>
     Local browser/app storage keeps only your own preferences: the theme, your saved signature,
-    and the AI endpoint and model name you entered. An API key you type is kept on your device so
+    the AI endpoint and model name you entered, and the cached Ollama model list. An API key you type is kept on your device so
     you do not have to retype it. None of it is transmitted. Clearing site data (web) or deleting
     the app's support folder (desktop) removes all of it.
   </p>

@@ -167,10 +167,10 @@
   <div class="grid">
     <div class="card"><span class="em">FILL &amp; SIGN</span><h3>Forms that stay alive</h3><p>Fill text fields, checkboxes, radios and dropdowns. Export keeps them interactive — or flatten to permanent ink. Draw, type or upload your signature once, reuse forever.</p></div>
     <div class="card"><span class="em">RETYPE IN PLACE</span><h3>Change the words, keep the look</h3><p>Select any printed text and edit it — the result is recomposed from the document’s own letterforms, so it stays pixel-faithful. Fix a typo, swap a name or a date, and no one can tell.</p></div>
-    <div class="card"><span class="em">FONT MATCHING</span><h3>Nine faces, really embedded</h3><p>Added and edited text is set in a real font matched to the print — sans, serif, mono, geometric, humanist, condensed, rounded, slab or grotesk — embedded on export, Cyrillic included.</p></div>
+    <div class="card"><span class="em">FONT MATCHING</span><h3>Nine faces, really embedded</h3><p>Added and edited text is set in a real font matched to the print — sans, serif, mono, geometric, humanist, condensed, rounded, slab or grotesk — embedded on export. Latin text stays real, selectable type; Cyrillic, Greek and CJK are drawn through a crisp 3× raster so they look right on any reader, at the cost of being selectable.</p></div>
     <div class="card"><span class="em">TRUE REDACTION</span><h3>Gone, not hidden</h3><p>With “true redaction” ticked on export, covered content is removed from the page’s own drawing program — not a black box a journalist can copy-paste under. Leave it unticked and the box is only a box.</p></div>
     <div class="card"><span class="em">PAGE SURGERY</span><h3>Merge, split, reorder</h3><p>Drag pages between positions, rotate scans, extract ranges, merge whole files, stamp page numbers. Annotations ride along.</p></div>
-    <div class="card"><span class="em">MAGIC ERASER</span><h3>Rub anything out</h3><p>Paint over a stamp, a watermark, handwriting on a scan — the background underneath is rebuilt: gradients, textures, coloured bands and all. Not a white box. Fully local. Erase a box and the covered words leave the file too; the freehand brush only covers pixels, so use Redact when removal has to be provable.</p></div>
+    <div class="card"><span class="em">MAGIC ERASER</span><h3>Rub anything out</h3><p>Paint over a stamp, a watermark, handwriting on a scan — the background underneath is rebuilt: gradients, textures, coloured bands and all. Not a white box. Fully local. Erase a box and the covered words leave the file too — unless they live in a drawing two pages share, when they are covered instead and the export tells you; the freehand brush only covers pixels, so use Redact when removal has to be provable.</p></div>
     <div class="card"><span class="em">EVERYWHERE</span><h3>Desktop and browser</h3><p>Native app for macOS, Windows and Linux — and the exact same editor as a web app on any device. Files never upload anywhere.</p></div>
     <div class="card"><span class="em">FAST HANDS</span><h3>Built for keyboards</h3><p>⌘K command palette, one-key tools, full-text search, multi-document tabs, deep undo. The pros' pace without the pros' price.</p></div>
   </div>
@@ -197,7 +197,9 @@
       shape. A PDF is not a photograph. It is the instructions that drew the page, so ReshapedPDF
       asks the model only <em>which marks are the object</em> and then deletes those instructions.
       What appears underneath is not a guess at the background. It <b>is</b> the background, exactly
-      as the document’s author drew it — down to the rule that ran under the logo.
+      as the document’s author drew it — down to the rule that ran under the logo. On a page that
+      is genuinely just pixels — a photograph, a flat scan — there are no instructions to delete,
+      so it rebuilds the texture the way a phone would, and tells you that is what it did.
     </p>
   </div>
   <div class="providers">
@@ -236,7 +238,7 @@
     </div>
     <p class="note">Every installer is built by CI from this repository and attached to the
       GitHub release with a <code>SHA256SUMS.txt</code> beside it. Verify with
-      <code>shasum -a 256 -c SHA256SUMS.txt</code>.</p>
+      <code>shasum -a 256 --ignore-missing -c SHA256SUMS.txt</code> (on Windows, <code>certutil -hashfile &lt;file&gt; SHA256</code>). The file lists every platform's build, so without <code>--ignore-missing</code> it reports the ten you did not download as failures.</p>
   </details>
 
   <p class="note">
