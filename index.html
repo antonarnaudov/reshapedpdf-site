@@ -20,7 +20,7 @@
 <meta name="theme-color" content="#0b0c0f" />
 <meta name="color-scheme" content="dark" />
 <link rel="icon" href="/assets/favicon.svg" />
-<link rel="apple-touch-icon" href="/assets/favicon.svg" />/>
+<link rel="apple-touch-icon" href="/assets/favicon.svg" />
 <!-- Self-hosted. A page that sells "nothing leaves your machine" has no business
      asking a third party for its typefaces, and in the EU that request is a
      consent problem of its own. Licences ship beside the files in /fonts. -->
@@ -122,7 +122,7 @@
 <header>
   <div class="wrap"><nav>
     <a class="brand" href="/">
-      <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0" stop-color="#FF5C1F"/><stop offset="1" stop-color="#FFB454"/></linearGradient></defs><path fill="#EFECE4" d="M10 2 H19 L26 9 V28 Q26 30 24 30 H10 Q8 30 8 28 V4 Q8 2 10 2 Z"/><path fill="#D7D2C6" d="M19 2 L26 9 H19 Z"/><rect x="11" y="7" width="5" height="1.7" rx="0.85" fill="#B9B3A6"/><rect x="11" y="11" width="12" height="1.7" rx="0.85" fill="#B9B3A6"/><rect x="11" y="25" width="9" height="1.7" rx="0.85" fill="#C6C0B3"/><path fill="#A63E10" d="M5 22.6 L8 22.6 L8 24.6 Z"/><rect x="5" y="15" width="19" height="7.6" rx="1.6" fill="url(#hg)"/><text x="14.5" y="20.8" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="5.8" letter-spacing="0.45" fill="#FFFFFF">PDF</text></svg><span>Resha<span class="heat">PDF</span></span>
+      <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0" stop-color="#FF5C1F"/><stop offset="1" stop-color="#FFB454"/></linearGradient></defs><path fill="#EFECE4" d="M10 2 H19 L26 9 V28 Q26 30 24 30 H10 Q8 30 8 28 V4 Q8 2 10 2 Z"/><path fill="#D7D2C6" d="M19 2 L26 9 H19 Z"/><rect x="11" y="7" width="5" height="1.7" rx="0.85" fill="#B9B3A6"/><rect x="11" y="11" width="12" height="1.7" rx="0.85" fill="#B9B3A6"/><rect x="11" y="25" width="9" height="1.7" rx="0.85" fill="#C6C0B3"/><path fill="#A63E10" d="M5 22.6 L8 22.6 L8 24.6 Z"/><rect x="5" y="15" width="19" height="7.6" rx="1.6" fill="url(#hg)"/><text x="14.5" y="20.8" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="5.8" letter-spacing="0.45" fill="#FFFFFF">PDF</text></svg><span>Reshaped<span class="heat">PDF</span></span>
     </a>
     <a class="link" href="#features">Features</a>
     <a class="link" href="#ai">AI blending</a>
@@ -234,11 +234,11 @@
     <div class="grid">
       <div class="card"><h3>macOS</h3><p>Apple Silicon &amp; Intel · .dmg, .zip<br /><span class="dim">macOS 11+</span></p><a class="btn" href="https://github.com/antonarnaudov/reshapedpdf-app/releases/latest">Downloads</a></div>
       <div class="card"><h3>Windows</h3><p>x64 &amp; ARM64 · .exe installer<br /><span class="dim">Windows 10 &amp; 11</span></p><a class="btn" href="https://github.com/antonarnaudov/reshapedpdf-app/releases/latest">Downloads</a></div>
-      <div class="card"><h3>Linux</h3><p>.AppImage, .deb, .rpm, .tar.gz<br /><span class="dim">x86-64</span></p><a class="btn" href="https://github.com/antonarnaudov/reshapedpdf-app/releases/latest">Downloads</a></div>
+      <div class="card"><h3>Linux</h3><p>.AppImage (x86-64 &amp; ARM64), .deb (x86-64)<br /><span class="dim">glibc 2.28+</span></p><a class="btn" href="https://github.com/antonarnaudov/reshapedpdf-app/releases/latest">Downloads</a></div>
     </div>
     <p class="note">Every installer is built by CI from this repository and attached to the
       GitHub release with a <code>SHA256SUMS.txt</code> beside it. Verify with
-      <code>shasum -a 256 --ignore-missing -c SHA256SUMS.txt</code> (on Windows, <code>certutil -hashfile &lt;file&gt; SHA256</code>). The file lists every platform's build, so without <code>--ignore-missing</code> it reports the ten you did not download as failures.</p>
+      <code>shasum -a 256 --ignore-missing -c SHA256SUMS.txt</code> (on Windows, <code>certutil -hashfile &lt;file&gt; SHA256</code>). The file lists every platform&rsquo;s build, so without <code>--ignore-missing</code> it reports the ones you did not download as failures.</p>
   </details>
 
   <p class="note">
