@@ -1,0 +1,23 @@
+README.md
+  s_d2ecb15f6febc8::t_5305764647d19d 3
+index.html
+  s_d2ecb15f6febc8::t_32bca3d2ca1625 131,229,235-237,261,281
+privacy.html
+  s_d2ecb15f6febc8::t_4190eac3d30d9a 112
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a98f667cba9cb3d0c92074257b3a5b46f12ff788",
+  "prompts": {},
+  "sessions": {
+    "s_d2ecb15f6febc8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bd977926-fda5-4a29-a234-f089ee9a9a77",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Anton Arnaudov <anton.arnaudov.me@gmail.com>"
+    }
+  }
+}
