@@ -285,9 +285,11 @@
     } else if (/Win/i.test(p) || /Windows/i.test(ua)) {
       picks = { label: 'Recommended for your PC', btn: 'Download for Windows',
                 sub: 'x64 and ARM64 installers · Windows 10 & 11' }
-    } else if (/Linux/i.test(p) || /X11/i.test(ua)) {
+    } else if ((/Linux/i.test(p) || /X11/i.test(ua)) && !/Android|Mobile/i.test(ua)) {
+      // Android reports platform "Linux armv8l", so without the second test a
+      // phone is offered a desktop AppImage it cannot run.
       picks = { label: 'Recommended for your machine', btn: 'Download for Linux',
-                sub: 'AppImage, .deb, .rpm and .tar.gz · x86-64' }
+                sub: 'AppImage (x86-64 & ARM64) and .deb (x86-64) · glibc 2.28+' }
     }
     var box = document.getElementById('pick')
     if (!picks || !box) { var d = document.getElementById('allbuilds'); if (d) d.open = true; return }
