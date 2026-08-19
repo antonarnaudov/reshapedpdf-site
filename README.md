@@ -1,6 +1,6 @@
 # reshapedpdf.com
 
-The landing page for [ReshapedPDF](https://github.com/antonarnaudov/reshapedpdf) —
+The landing page for [ReshapedPDF](https://github.com/antonarnaudov/reshapedpdf-app) —
 a free, private PDF editor.
 
 Static HTML. No build step, no framework, no dependencies to rot. Open
