@@ -1,0 +1,53 @@
+src/components/Header.astro
+  s_0107f54d98a907::t_442548f87a70a6 9-11,13,18-19,21,23-24
+src/styles/global.css
+  s_0107f54d98a907::t_ee7e58db7c964c 4-12,19,21-27,34,37,39-42,44-70,73,75,80
+  s_0107f54d98a907::t_b5228671557c9b 76-79
+src/components/EraseDemo.astro
+  s_0107f54d98a907::t_dc942c75d4967c 1-43,46,48-55
+  s_0107f54d98a907::t_9a2e0682fa32f1 44-45,47
+src/data/site.ts
+  s_0107f54d98a907::t_a38e639518acba 8-11,59-67,70,76-77,80-83,89-91,104-143
+src/components/RedactDemo.astro
+  s_0107f54d98a907::t_81527195914d09 1-51
+src/components/Footer.astro
+  s_0107f54d98a907::t_763bdf2c26eac8 2-3,6-30,34-46
+src/pages/index.astro
+  s_0107f54d98a907::t_e5246c6cca0573 151,158-163
+  s_0107f54d98a907::t_077a7de8ed9ade 23
+  s_0107f54d98a907::t_a471f676d333ee 197
+  s_0107f54d98a907::t_50869182b310db 243
+  s_0107f54d98a907::t_66948674ce9059 5-8,10-11,20,22,24-26,28-30,32-40,43-50,52-105,112,114-118,120,129,132-135,139,141,145-150,152-157,164-166,168-186,188-196,198-221,223-224,226-228,232-233,235-242,244-247
+src/components/RetypeDemo.astro
+  s_0107f54d98a907::t_04ec1bef7fff8a 1-16,18-72
+  s_0107f54d98a907::t_38bd528a572fd5 17
+src/layouts/Base.astro
+  s_0107f54d98a907::t_58c0de26d7cbef 36-38
+.gitignore
+  s_0107f54d98a907::t_6b7ad5a3b0188a 10-11
+README.md
+  s_0107f54d98a907::t_4e5e7135f36ed4 6-8,11-14,21-22,25-34,37,47-50,54
+src/components/PriceInvoice.astro
+  s_0107f54d98a907::t_32ddf86b05acc1 1-45
+src/components/Faq.astro
+  s_0107f54d98a907::t_ebb94d7eaa4de7 20
+  s_0107f54d98a907::t_0e047943dc5115 1-19,21-37
+src/components/DownloadSection.astro
+  s_0107f54d98a907::t_eccc660973078c 5-7,10,12,18-26,28-31,33-43,53,65,81-95,97-106
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "0acf33c2b24686420873e50a358bc5914aee1f7b",
+  "prompts": {},
+  "sessions": {
+    "s_0107f54d98a907": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6ee90ec8-d743-4ce2-9c15-fccbabce3202",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Anton Arnaudov <anton.arnaudov.me@gmail.com>"
+    }
+  }
+}
