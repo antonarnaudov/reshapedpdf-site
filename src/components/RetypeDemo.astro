@@ -1,0 +1,72 @@
+---
+/* The animated invoice — the same Ironworks sample the screenshot below has
+   open, so the demo and the product visibly agree. Decorative and aria-hidden:
+   it demonstrates the product to people who can see it and says nothing to
+   people who cannot, which is why the hero copy carries the actual claim. */
+---
+<div class="paper crop vignette" aria-hidden="true">
+  <div class="doc-h">IRONWORKS SUPPLY CO.<span class="inv">INVOICE #2041</span></div>
+  <div class="rows">
+    <div class="row"><span>Anvil, 35 kg — forged steel</span><span>820.00</span></div>
+    <div class="row"><span>Cross-peen hammer, 1.5 kg</span><span>228.00</span></div>
+    <div class="row">
+      <span class="fix">
+        <span class="old">Delivery: 14 Vitosha Blvd</span>
+        <span class="patch"><span class="new">Delivery: 22 Graf Ignatiev St</span></span>
+        <span class="marquee">
+          <i class="reg tl"></i><i class="reg tr"></i><i class="reg bl"></i><i class="reg br"></i>
+        </span>
+        <span class="chip read">R · read — humanist sans · 14.5&nbsp;px</span>
+        <span class="chip done">matched · embedded · looks printed</span>
+      </span>
+      <span>0.00</span>
+    </div>
+    <div class="row"><span>Coal, bituminous — 25 kg bag</span><span>199.00</span></div>
+    <div class="row last"><span class="total">Total due</span><span class="amount">EUR 1,457.00</span></div>
+  </div>
+</div>
+
+<style>
+  .vignette{padding:26px 30px 30px;font-size:13.5px;width:100%;max-width:440px}
+  .doc-h{font-weight:750;color:var(--paper-ink);font-size:15px;letter-spacing:.01em;display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--paper-ink);padding-bottom:10px}
+  .inv{color:var(--ember);font-size:11.5px;font-family:var(--mono);font-weight:500}
+  .rows{margin-top:6px}
+  .row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--paper-rule);white-space:nowrap}
+  .row.last{border:none;padding-top:12px}
+  .total{font-weight:750;color:var(--paper-ink)}
+  .amount{color:var(--ember);font-weight:750}
+
+  .fix{position:relative;display:inline-block}
+  .old{transition:none;animation:oldtext 9s infinite}
+  .patch{position:absolute;inset:-1px -3px;background:var(--paper);display:flex;align-items:center;padding:0 3px;opacity:0;animation:patch 9s infinite}
+  .new{display:inline-block;overflow:hidden;white-space:nowrap;width:0;border-right:1.5px solid var(--ember);animation:typing 9s steps(28) infinite}
+
+  .marquee{position:absolute;inset:-6px -9px;border:1.5px dashed var(--ember);border-radius:3px;opacity:0;animation:marquee 9s infinite}
+  .marquee .reg{position:absolute;color:var(--ember);transform:scale(.72)}
+  .reg.tl{left:-7px;top:-7px}.reg.tr{right:-7px;top:-7px}.reg.bl{left:-7px;bottom:-7px}.reg.br{right:-7px;bottom:-7px}
+
+  .chip{position:absolute;left:0;top:-34px;font-family:var(--mono);font-size:10px;letter-spacing:.02em;color:var(--paper);background:#26262b;border-radius:5px;padding:4px 9px;opacity:0;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+  .chip.read{animation:chipread 9s infinite}
+  .chip.done{color:#d9f3e4;background:#1d3a2c;animation:chipdone 9s infinite}
+
+  /* One 9-second reel: box in → read → retype → proof chip → rest → reset. */
+  @keyframes marquee{4%,54%{opacity:1}0%,60%,100%{opacity:0}}
+  @keyframes chipread{9%,48%{opacity:1}0%,6%,53%,100%{opacity:0}}
+  @keyframes chipdone{58%,88%{opacity:1}0%,55%,93%,100%{opacity:0}}
+  @keyframes oldtext{0%,18%{opacity:1}22%,96%{opacity:0}100%{opacity:1}}
+  @keyframes patch{0%,18%{opacity:0}20%,94%{opacity:1}98%,100%{opacity:0}}
+  @keyframes typing{0%,22%{width:0}52%,94%{width:100%}96%,100%{width:0}}
+
+  /* Someone who asked their system to stop moving things means it: hold the
+     finished edit, proof chip on, nothing looping. */
+  @media (prefers-reduced-motion: reduce){
+    .old{animation:none;opacity:0}
+    .patch{animation:none;opacity:1}
+    .new{animation:none;width:100%;border-right:none}
+    .marquee{animation:none;opacity:0}
+    .chip.read{animation:none;opacity:0}
+    .chip.done{animation:none;opacity:1}
+  }
+  @media(max-width:1020px){.vignette{max-width:520px;margin:0 auto}}
+  @media(max-width:560px){.vignette{padding:20px 18px;font-size:12px}.chip{top:-30px}}
+</style>

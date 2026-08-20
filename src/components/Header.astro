@@ -6,17 +6,20 @@ import { REPO } from '../data/site'
   <div class="wrap"><nav>
     <a class="brand" href="/"><Mark /></a>
     <a class="link" href="/#features">Features</a>
-    <a class="link" href="/#ai">AI blending</a>
-    <a class="link" href="/#download">Download</a>
-    <a class="link" href="/privacy">Privacy</a>
+    <a class="link" href="/#ai">AI</a>
+    <a class="link" href="/#price">Price</a>
+    <a class="link" href="/#faq">FAQ</a>
     <a class="link" href={REPO}>GitHub</a>
+    <a class="btn primary small" href="/#download">Download</a>
   </nav></div>
 </header>
 
 <style>
-  header{position:sticky;top:0;z-index:10;background:rgba(11,12,15,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--hair)}
-  nav{display:flex;align-items:center;gap:26px;height:60px}
+  header{position:sticky;top:0;z-index:10;background:rgba(11,12,15,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--hair)}
+  nav{display:flex;align-items:center;gap:24px;height:62px}
   .brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-size:20px;font-weight:640;color:var(--ink-bright);letter-spacing:-.02em;margin-right:auto}
-  nav a.link{font-size:14px;color:var(--dim);font-weight:550}
+  nav a.link{font-size:14px;color:var(--dim);font-weight:550;transition:color .15s}
   nav a.link:hover{color:var(--ink-bright)}
+  nav :global(.btn.small){height:36px;padding:0 16px;font-size:13.5px;border-radius:9px}
+  @media(max-width:720px){nav a.link{display:none}}
 </style>

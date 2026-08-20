@@ -2,46 +2,45 @@
 import { LATEST, PLATFORMS } from '../data/site'
 ---
 <section class="dl" id="download"><div class="wrap">
-  <h2>Get ReshapedPDF</h2>
-  <p class="lede">Free forever for everything local, and open source.</p>
+  <div class="sec-label reveal"><b>§ 05</b> get it</div>
+  <h2 class="reveal">On your bench in a minute.</h2>
+  <p class="lede reveal">Free forever for everything local, and open source. No account — the download is the whole onboarding.</p>
 
   {/* What you are most likely to want, guessed from your browser and offered
-      first. Everything else stays one click away below: a guess that hides the
+      first. Everything else stays visible below: a guess that hides the
       alternatives is worse than no guess. */}
-  <div id="pick" class="pick" hidden>
+  <div id="pick" class="pick reveal" hidden>
     <div class="pick-label" id="pick-label">Recommended for you</div>
     <a class="btn primary big" id="pick-btn" href={LATEST}>Download</a>
     <div class="pick-sub" id="pick-sub"></div>
   </div>
 
-  <details id="allbuilds"><summary>All builds &amp; checksums</summary>
-    <div class="grid">
-      {PLATFORMS.map((p) => (
-        <div class="card">
-          <h3>{p.name}</h3>
-          <p set:html={`${p.formats}<br /><span class="dim">${p.requires}</span>`} />
-          <a class="btn" href={LATEST}>Downloads</a>
-        </div>
-      ))}
-    </div>
-    <p class="note">Every installer is built by CI from this repository and attached to the
-      GitHub release with a <code>SHA256SUMS.txt</code> beside it. Verify with
-      <code>shasum -a 256 --ignore-missing -c SHA256SUMS.txt</code> (on Windows, <code>certutil -hashfile &lt;file&gt; SHA256</code>). The file lists every platform&rsquo;s build, so without <code>--ignore-missing</code> it reports the ones you did not download as failures.</p>
-  </details>
+  <div class="grid reveal">
+    {PLATFORMS.map((p) => (
+      <div class="card">
+        <h3>{p.name}</h3>
+        <p set:html={`${p.formats}<br /><span class="dim">${p.requires}</span>`} />
+        <a class="btn ghost" href={LATEST}>Downloads</a>
+      </div>
+    ))}
+  </div>
 
-  <p class="note">
-    <span id="webapp" hidden>Or use the <a href="/app/" class="ember-link">web app</a> — same editor, zero install.<br /></span>
-    <strong>These builds are not code-signed yet.</strong> That means your system will
-    stop you the first time, and here is exactly how to get past it.<br />
-    <b>macOS 15 (Sequoia) and newer</b> — open it once, let it be blocked, then
-    System&nbsp;Settings → Privacy&nbsp;&amp; Security → scroll down → <b>Open Anyway</b>.
-    (The old right-click → Open trick no longer works; Apple removed it.) Or, in a
-    terminal: <code>xattr -dr com.apple.quarantine /Applications/ReshapedPDF.app</code>.<br />
-    <b>macOS 14 and earlier</b> — right-click the app → Open → Open.<br />
-    <b>Windows</b> — SmartScreen → “More info” → “Run anyway”.
-    <b>Linux</b> — <code>chmod +x ReshapedPDF-*.AppImage</code>.<br />
-    Signing certificates are on the list; a free tool today beat waiting for them.
+  <p class="note center reveal" id="webapp-line">
+    <span id="webapp" hidden>Or skip the install: the <a href="/app/" class="ember-link">web app</a> is the same editor, in your browser, files still on your machine.<br /></span>
+    Every installer is built by CI from the public repository, with <code>SHA256SUMS.txt</code> beside
+    it on the release page — the FAQ shows how to verify.
   </p>
+
+  <div class="signing reveal">
+    <div class="signing-h"><span class="reg"></span>The builds are not code-signed yet — your system will stop you once</div>
+    <div class="signing-cols">
+      <p><b>macOS 15+</b> — open it, let it be blocked, then System&nbsp;Settings → Privacy&nbsp;&amp;&nbsp;Security → <b>Open&nbsp;Anyway</b> (Apple removed the right-click trick). Or: <code>xattr -dr com.apple.quarantine /Applications/ReshapedPDF.app</code></p>
+      <p><b>macOS 14 and earlier</b> — right-click the app → Open → Open.</p>
+      <p><b>Windows</b> — SmartScreen → “More info” → “Run anyway”.</p>
+      <p><b>Linux</b> — <code>chmod +x ReshapedPDF-*.AppImage</code></p>
+    </div>
+    <p class="signing-f">Signing certificates are on the list; a free tool today beat waiting for them.</p>
+  </div>
 </div></section>
 
 {/* is:inline so Astro ships these byte for byte rather than bundling them —
@@ -51,7 +50,7 @@ import { LATEST, PLATFORMS } from '../data/site'
 <script is:inline define:vars={{ LATEST, PLATFORMS }}>
   // Offer the right build first. The platform is a guess — navigator tells you
   // the OS and, on Apple Silicon, nothing reliable about the architecture — so
-  // the guess names itself and the full list sits open underneath it.
+  // the guess names itself and the full list stays visible underneath it.
   ;(function () {
     var ua = navigator.userAgent, p = navigator.platform || ''
     var by = function (id) { return PLATFORMS.find(function (x) { return x.id === id }) }
@@ -63,7 +62,7 @@ import { LATEST, PLATFORMS } from '../data/site'
     else if ((/Linux/i.test(p) || /X11/i.test(ua)) && !/Android|Mobile/i.test(ua)) picks = by('linux')
 
     var box = document.getElementById('pick')
-    if (!picks || !box) { var d = document.getElementById('allbuilds'); if (d) d.open = true; return }
+    if (!picks || !box) return
     document.getElementById('pick-label').textContent = picks.pickLabel
     var b = document.getElementById('pick-btn')
     b.textContent = picks.pickBtn; b.href = LATEST
@@ -79,18 +78,30 @@ import { LATEST, PLATFORMS } from '../data/site'
 </script>
 
 <style>
-  .dl :global(.grid){grid-template-columns:repeat(3,1fr)}
-  .dl :global(.card){text-align:center}
-  .dl :global(.card .btn){margin-top:12px}
-  .pick{text-align:center;margin:0 0 22px}
-  .pick-label{font-size:13px;color:var(--dim);margin-bottom:10px;letter-spacing:.02em}
-  :global(.btn.big){font-size:16px;padding:13px 28px}
-  .pick-sub{font-size:12.5px;color:var(--dim);margin-top:9px}
-  #allbuilds{margin-top:4px}
-  #allbuilds summary{cursor:pointer;color:var(--dim);font-size:14px;padding:6px 0}
-  #allbuilds summary:hover{color:var(--ember)}
-  :global(.dim){color:var(--dim);font-size:12.5px}
+  .dl{padding:104px 0;background:var(--bench);border-block:1px solid var(--hair)}
+  .pick{text-align:center;margin:46px 0 10px}
+  .pick-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+  :global(.btn.big){font-size:16.5px;height:54px;padding:0 34px;border-radius:13px}
+  .pick-sub{font-size:12.5px;color:var(--dim);margin-top:10px}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px}
+  .card{background:var(--raised);border:1px solid var(--hair);border-radius:14px;padding:24px;text-align:center}
+  .card h3{font-family:var(--disp);font-size:17px;color:var(--ink-bright);font-weight:640;margin-bottom:8px}
+  .card p{font-size:13px;color:var(--dim);line-height:1.65}
+  .card :global(.btn){margin-top:14px;height:38px;font-size:13.5px}
+  :global(.dim){color:var(--faint);font-size:12px}
+
+  .note{font-size:13px;color:var(--dim);line-height:1.75;margin-top:26px}
+  .note.center{text-align:center;max-width:640px;margin-left:auto;margin-right:auto}
   .ember-link{color:var(--ember)}
-  @media(max-width:840px){.dl :global(.grid){grid-template-columns:1fr 1fr}}
-  @media(max-width:560px){.dl :global(.grid){grid-template-columns:1fr}}
+
+  .signing{margin:38px auto 0;max-width:860px;border:1px dashed var(--hair-strong);border-radius:14px;padding:22px 26px;background:var(--inset)}
+  .signing-h{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink);margin-bottom:14px}
+  .signing-h .reg{color:var(--ember)}
+  .signing-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px 28px}
+  .signing-cols p{font-size:12.5px;color:var(--dim);line-height:1.7}
+  .signing-cols b{color:var(--ink)}
+  .signing-f{margin-top:14px;font-size:11.5px;color:var(--faint)}
+
+  @media(max-width:840px){.grid{grid-template-columns:1fr}.signing-cols{grid-template-columns:1fr}}
 </style>

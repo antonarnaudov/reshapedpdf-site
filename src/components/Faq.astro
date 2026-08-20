@@ -1,0 +1,37 @@
+---
+import { FAQS } from '../data/site'
+---
+<section id="faq"><div class="wrap">
+  <div class="sec-label reveal"><b>§ 06</b> the fine print, out loud</div>
+  <h2 class="reveal">Questions with short answers.</h2>
+
+  <div class="list reveal">
+    {FAQS.map((f) => (
+      <details>
+        <summary><span class="q">{f.q}</span><span class="tick" aria-hidden="true"></span></summary>
+        <p set:html={f.a} />
+      </details>
+    ))}
+  </div>
+</div></section>
+
+<style>
+  section{padding:104px 0 120px}
+  .list{max-width:860px;margin-top:44px}
+  details{border-bottom:1px solid var(--hair)}
+  details:first-child{border-top:1px solid var(--hair)}
+  summary{display:flex;align-items:center;justify-content:space-between;gap:18px;cursor:pointer;padding:20px 2px;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  .q{font-family:var(--disp);font-size:17.5px;font-weight:600;color:var(--ink-bright);letter-spacing:-.01em}
+  summary:hover .q{color:var(--amber)}
+  /* the marker is a plus that becomes a registration cross when open */
+  .tick{position:relative;width:15px;height:15px;flex:none;color:var(--dim);transition:transform .25s,color .25s}
+  .tick::before,.tick::after{content:'';position:absolute;background:currentColor}
+  .tick::before{left:7px;top:0;width:1.5px;height:15px}
+  .tick::after{top:7px;left:0;height:1.5px;width:15px}
+  details[open] .tick{transform:rotate(45deg);color:var(--ember)}
+  details p{padding:0 40px 22px 2px;font-size:14.5px;color:var(--dim);line-height:1.75;max-width:70ch}
+  details p :global(b){color:var(--ink)}
+  details p :global(a){color:var(--ember)}
+  details p :global(code){color:var(--ink);background:var(--raised);border:1px solid var(--hair);border-radius:4px;padding:1px 6px;font-size:11.5px;white-space:nowrap}
+</style>

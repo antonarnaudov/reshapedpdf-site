@@ -1,0 +1,51 @@
+---
+/* The copy-paste test. Two identical redactions; under each, what select-all
+   actually finds in the exported file. The difference IS the feature, so the
+   demo is mostly still — the only motion is the sweep of a selection. */
+---
+<div class="redact" aria-hidden="true">
+  <div class="half">
+    <div class="paper crop sheet">
+      <p class="line">Settlement reached between <span class="covered"><span class="secret">Arnaud &amp; Partners Ltd.</span><span class="box"></span><span class="sel"></span></span> and the counterparty on the terms below.</p>
+    </div>
+    <div class="readout bad">
+      <span class="cmd">⌘A ⌘C on the export →</span>
+      <span class="res">“…between Arnaud &amp; Partners Ltd. and…”</span>
+      <span class="verdict">✕ a box is only a box — the text is still in the file</span>
+    </div>
+  </div>
+  <div class="half">
+    <div class="paper crop sheet">
+      <p class="line">Settlement reached between <span class="covered"><span class="box solid"></span><span class="sel two"></span></span> and the counterparty on the terms below.</p>
+    </div>
+    <div class="readout good">
+      <span class="cmd">⌘A ⌘C on the export →</span>
+      <span class="res">“…between  and…”</span>
+      <span class="verdict">✓ true redaction — removed from the page’s own drawing program</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .redact{display:grid;grid-template-columns:1fr 1fr;gap:22px;width:100%;max-width:560px}
+  .sheet{padding:22px 20px;font-size:12.5px}
+  .line{color:var(--paper-dim);line-height:1.7}
+  .covered{position:relative;white-space:nowrap}
+  .secret{color:var(--paper-dim)}
+  .box{position:absolute;inset:-1px -2px;background:#141416;border-radius:1px}
+  .box.solid{position:relative;display:inline-block;inset:auto;width:118px;height:13px;vertical-align:-2px}
+  /* the selection sweep: proof someone is trying to read under the ink */
+  .sel{position:absolute;inset:-1px -2px;background:rgba(255,92,31,.35);transform-origin:left;transform:scaleX(0);animation:sweep 6s infinite}
+  .sel.two{inset:0 -2px}
+  @keyframes sweep{12%{transform:scaleX(0)}30%,55%{transform:scaleX(1)}75%,100%{transform:scaleX(0)}}
+
+  .readout{margin-top:12px;font-family:var(--mono);font-size:10.5px;line-height:1.8;display:flex;flex-direction:column;gap:1px;padding:10px 13px;border-radius:8px;border:1px solid var(--hair);background:var(--inset)}
+  .cmd{color:var(--faint)}
+  .res{color:var(--ink)}
+  .bad .verdict{color:#e07b5f}
+  .good .verdict{color:var(--ok)}
+
+  @media (prefers-reduced-motion: reduce){.sel{animation:none;transform:scaleX(0)}}
+  @media(max-width:1020px){.redact{max-width:640px;margin:0 auto}}
+  @media(max-width:640px){.redact{grid-template-columns:1fr}}
+</style>

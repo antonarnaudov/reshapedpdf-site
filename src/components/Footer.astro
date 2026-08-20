@@ -1,13 +1,47 @@
 ---
-import { REPO, CONTACT } from '../data/site'
+import Mark from './Mark.astro'
+import { REPO, LATEST, CONTACT } from '../data/site'
 ---
 <footer><div class="wrap">
-  <span>© 2026 ReshapedPDF · built on pdf.js &amp; pdf-lib · your documents never leave your machine</span>
-  <span><a href={REPO}>GitHub</a> · <a href={`mailto:${CONTACT}`}>Contact</a></span>
+  <div class="cols">
+    <div class="col brand-col">
+      <a class="brand" href="/"><Mark size={20} /></a>
+      <p>Every PDF is just material.<br />Reshape it.</p>
+    </div>
+    <div class="col">
+      <span class="h">Product</span>
+      <a href="/#features">Features</a>
+      <a href="/#ai">AI blending</a>
+      <a href="/#price">Price</a>
+      <a href="/#download">Download</a>
+    </div>
+    <div class="col">
+      <span class="h">Project</span>
+      <a href={REPO}>GitHub</a>
+      <a href={LATEST}>Releases</a>
+      <a href="/privacy">Privacy</a>
+      <a href={`mailto:${CONTACT}`}>Contact</a>
+    </div>
+  </div>
+  <div class="base">
+    <span class="reg" aria-hidden="true"></span>
+    <span>© 2026 ReshapedPDF · MIT · built on pdf.js &amp; pdf-lib · type: Bricolage Grotesque, Hanken Grotesk &amp; Spline Sans Mono, self-hosted · no analytics on this page</span>
+    <span class="reg" aria-hidden="true"></span>
+  </div>
 </div></footer>
 
 <style>
-  footer{border-top:1px solid var(--hair);padding:34px 0;color:var(--faint);font-size:13px}
-  footer :global(.wrap){display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
-  footer a{color:var(--dim)}
+  footer{border-top:1px solid var(--hair);padding:56px 0 40px;background:var(--lighttable)}
+  .cols{display:flex;gap:60px;flex-wrap:wrap;justify-content:space-between}
+  .brand-col{max-width:260px}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-size:18px;font-weight:640;color:var(--ink-bright);letter-spacing:-.02em}
+  .brand-col p{margin-top:12px;font-size:13.5px;color:var(--dim);line-height:1.6}
+  .col{display:flex;flex-direction:column;gap:9px}
+  .col .h{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+  .col a{font-size:13.5px;color:var(--dim)}
+  .col a:hover{color:var(--ink-bright)}
+  .base{display:flex;align-items:center;gap:14px;margin-top:46px;padding-top:22px;border-top:1px solid var(--hair);color:var(--faint);font-size:12px}
+  .base .reg{color:var(--faint);flex:none}
+  .base span:nth-child(2){flex:1;text-align:center}
+  @media(max-width:640px){.cols{gap:32px}}
 </style>

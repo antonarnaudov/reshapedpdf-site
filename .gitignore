@@ -7,3 +7,5 @@ dist/
 public/app/
 .DS_Store
 .vercel/
+# machine-local editor/agent config (dev-server launch paths etc.)
+.claude/
