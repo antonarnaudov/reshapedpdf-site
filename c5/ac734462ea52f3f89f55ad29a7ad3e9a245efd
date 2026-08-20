@@ -1,0 +1,22 @@
+src/data/site.ts
+  s_0107f54d98a907::t_72fb33d501f24a 17-26,29-36,39,43-51,56-75
+src/components/DownloadSection.astro
+  s_0107f54d98a907::t_220f04342dff7f 2-9,11-18,21-30,32-68,73-78,81,85-88,90-95,97-131,136-204
+  s_0107f54d98a907::t_ce047e762cf805 31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "c5ac734462ea52f3f89f55ad29a7ad3e9a245efd",
+  "prompts": {},
+  "sessions": {
+    "s_0107f54d98a907": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6ee90ec8-d743-4ce2-9c15-fccbabce3202",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Anton Arnaudov <anton.arnaudov.me@gmail.com>"
+    }
+  }
+}
