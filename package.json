@@ -1,10 +1,16 @@
 {
   "name": "reshapedpdf-site",
   "private": true,
-  "description": "Landing page for ReshapedPDF — static, dependency-free, deploys anywhere.",
+  "type": "module",
+  "description": "Landing page for ReshapedPDF \u2014 static, self-hosted, no third-party requests.",
   "scripts": {
-    "dev": "python3 -m http.server 4173",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
     "og": "node scripts/render-og.mjs",
     "app": "./scripts/sync-app.sh"
+  },
+  "devDependencies": {
+    "astro": "^5.0.0"
   }
 }

@@ -1,6 +1,9 @@
 node_modules/
+dist/
+.astro/
 # the editor itself, assembled by scripts/sync-app.sh from the app repo — built,
-# never committed, so this repo stays a site repo
-app/
+# never committed, so this repo stays a site repo. It lives under public/ so the
+# Astro build copies it into dist/ untouched.
+public/app/
 .DS_Store
 .vercel/

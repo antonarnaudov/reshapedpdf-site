@@ -1,0 +1,9 @@
+---
+/** The ember wordmark. One copy, deliberately: the header on both pages used to
+    carry its own, and one of those copies dropped three letters out of the
+    product name and stayed that way for as long as it existed. A name is not
+    something to keep two hand-written copies of. */
+interface Props { size?: number; withText?: boolean }
+const { size = 24, withText = true } = Astro.props
+---
+<svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="0.35"><stop offset="0" stop-color="#FF5C1F"/><stop offset="1" stop-color="#FFB454"/></linearGradient></defs><path fill="#EFECE4" d="M10 2 H19 L26 9 V28 Q26 30 24 30 H10 Q8 30 8 28 V4 Q8 2 10 2 Z"/><path fill="#D7D2C6" d="M19 2 L26 9 H19 Z"/><rect x="11" y="7" width="5" height="1.7" rx="0.85" fill="#B9B3A6"/><rect x="11" y="11" width="12" height="1.7" rx="0.85" fill="#B9B3A6"/><rect x="11" y="25" width="9" height="1.7" rx="0.85" fill="#C6C0B3"/><path fill="#A63E10" d="M5 22.6 L8 22.6 L8 24.6 Z"/><rect x="5" y="15" width="19" height="7.6" rx="1.6" fill="url(#hg)"/><text x="14.5" y="20.8" text-anchor="middle" font-family="Arial, sans-serif" font-weight="800" font-size="5.8" letter-spacing="0.45" fill="#FFFFFF">PDF</text></svg>{withText && <span>Reshaped<span class="heat">PDF</span></span>}

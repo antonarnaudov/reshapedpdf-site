@@ -7,9 +7,10 @@
 # trimmed-down version: it is the product, served from this domain. That is worth
 # a lot on a landing page, and it costs one copy step.
 #
+# It lands in public/, which the Astro build copies into dist/ untouched.
 # The build lives in the app repo, which is deliberately NOT a dependency of this
 # one: a marketing site that cannot deploy because the app failed to compile is a
-# bad trade. So this is a script you run, and app/ is gitignored — if it is
+# bad trade. So this is a script you run, and public/app/ is gitignored — if it is
 # missing, the site still deploys and the "web app" link is simply absent.
 #
 #   ./scripts/sync-app.sh [path-to-app-repo]     # default: ../reshapedpdf
@@ -28,6 +29,7 @@ fi
 echo "Building the editor from $APP …"
 (cd "$APP" && npm run build)
 
-rm -rf "$SITE/app"
-cp -R "$APP/dist" "$SITE/app"
-echo "→ $SITE/app  ($(du -sh "$SITE/app" | cut -f1)) — the site now serves the editor at /app"
+rm -rf "$SITE/public/app"
+mkdir -p "$SITE/public"
+cp -R "$APP/dist" "$SITE/public/app"
+echo "→ $SITE/public/app  ($(du -sh "$SITE/public/app" | cut -f1)) — the site now serves the editor at /app"

@@ -1,0 +1,96 @@
+---
+import { LATEST, PLATFORMS } from '../data/site'
+---
+<section class="dl" id="download"><div class="wrap">
+  <h2>Get ReshapedPDF</h2>
+  <p class="lede">Free forever for everything local, and open source.</p>
+
+  {/* What you are most likely to want, guessed from your browser and offered
+      first. Everything else stays one click away below: a guess that hides the
+      alternatives is worse than no guess. */}
+  <div id="pick" class="pick" hidden>
+    <div class="pick-label" id="pick-label">Recommended for you</div>
+    <a class="btn primary big" id="pick-btn" href={LATEST}>Download</a>
+    <div class="pick-sub" id="pick-sub"></div>
+  </div>
+
+  <details id="allbuilds"><summary>All builds &amp; checksums</summary>
+    <div class="grid">
+      {PLATFORMS.map((p) => (
+        <div class="card">
+          <h3>{p.name}</h3>
+          <p set:html={`${p.formats}<br /><span class="dim">${p.requires}</span>`} />
+          <a class="btn" href={LATEST}>Downloads</a>
+        </div>
+      ))}
+    </div>
+    <p class="note">Every installer is built by CI from this repository and attached to the
+      GitHub release with a <code>SHA256SUMS.txt</code> beside it. Verify with
+      <code>shasum -a 256 --ignore-missing -c SHA256SUMS.txt</code> (on Windows, <code>certutil -hashfile &lt;file&gt; SHA256</code>). The file lists every platform&rsquo;s build, so without <code>--ignore-missing</code> it reports the ones you did not download as failures.</p>
+  </details>
+
+  <p class="note">
+    <span id="webapp" hidden>Or use the <a href="/app/" class="ember-link">web app</a> — same editor, zero install.<br /></span>
+    <strong>These builds are not code-signed yet.</strong> That means your system will
+    stop you the first time, and here is exactly how to get past it.<br />
+    <b>macOS 15 (Sequoia) and newer</b> — open it once, let it be blocked, then
+    System&nbsp;Settings → Privacy&nbsp;&amp; Security → scroll down → <b>Open Anyway</b>.
+    (The old right-click → Open trick no longer works; Apple removed it.) Or, in a
+    terminal: <code>xattr -dr com.apple.quarantine /Applications/ReshapedPDF.app</code>.<br />
+    <b>macOS 14 and earlier</b> — right-click the app → Open → Open.<br />
+    <b>Windows</b> — SmartScreen → “More info” → “Run anyway”.
+    <b>Linux</b> — <code>chmod +x ReshapedPDF-*.AppImage</code>.<br />
+    Signing certificates are on the list; a free tool today beat waiting for them.
+  </p>
+</div></section>
+
+{/* is:inline so Astro ships these byte for byte rather than bundling them —
+    this page has no JavaScript build step and should not acquire one for two
+    dozen lines. The strings come from the same data the cards above use, so the
+    banner and the card can no longer disagree about what is published. */}
+<script is:inline define:vars={{ LATEST, PLATFORMS }}>
+  // Offer the right build first. The platform is a guess — navigator tells you
+  // the OS and, on Apple Silicon, nothing reliable about the architecture — so
+  // the guess names itself and the full list sits open underneath it.
+  ;(function () {
+    var ua = navigator.userAgent, p = navigator.platform || ''
+    var by = function (id) { return PLATFORMS.find(function (x) { return x.id === id }) }
+    var picks = null
+    if (/Mac/i.test(p) || /Mac OS X/i.test(ua)) picks = by('mac')
+    else if (/Win/i.test(p) || /Windows/i.test(ua)) picks = by('win')
+    // Android reports platform "Linux armv8l", so without the second test a
+    // phone is offered a desktop AppImage it cannot run.
+    else if ((/Linux/i.test(p) || /X11/i.test(ua)) && !/Android|Mobile/i.test(ua)) picks = by('linux')
+
+    var box = document.getElementById('pick')
+    if (!picks || !box) { var d = document.getElementById('allbuilds'); if (d) d.open = true; return }
+    document.getElementById('pick-label').textContent = picks.pickLabel
+    var b = document.getElementById('pick-btn')
+    b.textContent = picks.pickBtn; b.href = LATEST
+    document.getElementById('pick-sub').textContent = picks.pickSub
+    box.hidden = false
+  })()
+
+  // The browser editor is assembled into /app by scripts/sync-app.sh. If this
+  // deployment does not have it, say nothing rather than offer a dead link.
+  fetch('/app/index.html', { method: 'HEAD' })
+    .then(function (r) { if (r.ok) document.getElementById('webapp').hidden = false })
+    .catch(function () {})
+</script>
+
+<style>
+  .dl :global(.grid){grid-template-columns:repeat(3,1fr)}
+  .dl :global(.card){text-align:center}
+  .dl :global(.card .btn){margin-top:12px}
+  .pick{text-align:center;margin:0 0 22px}
+  .pick-label{font-size:13px;color:var(--dim);margin-bottom:10px;letter-spacing:.02em}
+  :global(.btn.big){font-size:16px;padding:13px 28px}
+  .pick-sub{font-size:12.5px;color:var(--dim);margin-top:9px}
+  #allbuilds{margin-top:4px}
+  #allbuilds summary{cursor:pointer;color:var(--dim);font-size:14px;padding:6px 0}
+  #allbuilds summary:hover{color:var(--ember)}
+  :global(.dim){color:var(--dim);font-size:12.5px}
+  .ember-link{color:var(--ember)}
+  @media(max-width:840px){.dl :global(.grid){grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.dl :global(.grid){grid-template-columns:1fr}}
+</style>

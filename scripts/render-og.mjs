@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
- * Render assets/og-card.html to assets/og.png at exactly 1200x630.
+ * Render scripts/og-card.html to public/assets/og.png at exactly 1200x630.
  *
  * The social card is the first thing anyone sees of this product — it is what a
  * link unfurls into on every platform — so it is built from the same HTML, fonts
@@ -30,7 +30,7 @@ const { app, BrowserWindow } = require('electron')
 app.disableHardwareAcceleration()
 app.whenReady().then(() => {
   const w = new BrowserWindow({ width: 1200, height: 630, show: false, webPreferences: { offscreen: false } })
-  w.loadURL(${JSON.stringify(pathToFileURL(join(ROOT, 'assets', 'og-card.html')).href)})
+  w.loadURL(${JSON.stringify(pathToFileURL(join(ROOT, 'scripts', 'og-card.html')).href)})
 })
 `)
 
@@ -64,7 +64,7 @@ const send = (method, params) => new Promise((res) => { const i = ++id; pending.
 await send('Emulation.setDeviceMetricsOverride', { width: 1200, height: 630, deviceScaleFactor: 2, mobile: false })
 await sleep(900) // let the variable fonts land before the shutter
 const shot = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false })
-writeFileSync(join(ROOT, 'assets', 'og.png'), Buffer.from(shot.data, 'base64'))
+writeFileSync(join(ROOT, 'public', 'assets', 'og.png'), Buffer.from(shot.data, 'base64'))
 console.log('assets/og.png written (1200x630 @2x)')
 ws.close()
 try { process.kill(-child.pid, 'SIGKILL') } catch { /* already gone */ }

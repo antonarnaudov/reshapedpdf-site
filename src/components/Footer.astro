@@ -1,0 +1,13 @@
+---
+import { REPO, CONTACT } from '../data/site'
+---
+<footer><div class="wrap">
+  <span>© 2026 ReshapedPDF · built on pdf.js &amp; pdf-lib · your documents never leave your machine</span>
+  <span><a href={REPO}>GitHub</a> · <a href={`mailto:${CONTACT}`}>Contact</a></span>
+</div></footer>
+
+<style>
+  footer{border-top:1px solid var(--hair);padding:34px 0;color:var(--faint);font-size:13px}
+  footer :global(.wrap){display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+  footer a{color:var(--dim)}
+</style>

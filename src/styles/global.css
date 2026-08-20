@@ -1,0 +1,45 @@
+/* ---------------------------------------------------------------------------
+   The whole design system, in one place.
+
+   Both pages used to carry their own copy of the @font-face block and their own
+   subset of the tokens, which is how the privacy page ended up with a slightly
+   different set from the landing page. There is one copy now and the layout
+   loads it.
+
+   Self-hosted, deliberately. A page that sells "nothing leaves your machine" has
+   no business asking a third party for its typefaces, and in the EU that request
+   is a consent problem of its own. Licences ship beside the files in /fonts.
+--------------------------------------------------------------------------- */
+@font-face{font-family:'Hanken Grotesk';src:url('/fonts/hanken-grotesk-latin-wght-normal.woff2') format('woff2-variations');font-weight:100 900;font-display:swap}
+@font-face{font-family:'Bricolage Grotesque';src:url('/fonts/bricolage-grotesque-latin-wght-normal.woff2') format('woff2-variations');font-weight:200 800;font-display:swap}
+@font-face{font-family:'Spline Sans Mono';src:url('/fonts/spline-sans-mono-latin-wght-normal.woff2') format('woff2-variations');font-weight:300 700;font-display:swap}
+
+:root {
+  --lighttable:#0b0c0f; --bench:#131417; --raised:#17181d; --inset:#0e0f12;
+  --ink-bright:#f4f2ec; --ink:#c9c7bf; --dim:#8f8e86; --faint:#5c5b55;
+  --hair:rgba(244,242,236,.075); --hair-strong:rgba(244,242,236,.14);
+  --ember:#ff5c1f; --heat:linear-gradient(120deg,#ff5c1f,#ffb454);
+  --ok:#58b586;
+  --ui:'Hanken Grotesk',system-ui,sans-serif; --disp:'Bricolage Grotesque',var(--ui); --mono:'Spline Sans Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--ui);color:var(--ink);background:var(--lighttable);
+  -webkit-font-smoothing:antialiased;line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+.heat{background:var(--heat);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 22px;border-radius:11px;font-weight:700;font-size:15px;transition:filter .15s,background .15s;border:1px solid transparent}
+.btn.primary{background:var(--heat);color:#1d0e04;box-shadow:0 2px 18px rgba(255,92,31,.3)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{border-color:var(--hair-strong);color:var(--ink-bright)}
+.btn.ghost:hover{background:var(--hair)}
+.kbd{font-family:var(--mono);font-size:12px;color:var(--dim);border:1px solid var(--hair);border-bottom-width:2px;border-radius:5px;padding:2px 7px;background:var(--raised)}
+
+/* The landing page is a wide, dotted light-table; the privacy page is a narrow
+   column on plain stock. `.page-wide` marks the former so one stylesheet can
+   serve both without either page redefining the shell. */
+body.page-wide{background-image:radial-gradient(circle,rgba(244,242,236,.05) 1px,transparent 1.3px);background-size:26px 26px}
+body.page-wide .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+body.page-narrow .wrap{max-width:760px;margin:0 auto;padding:0 24px}

@@ -1,0 +1,111 @@
+---
+import Base from '../layouts/Base.astro'
+import Mark from '../components/Mark.astro'
+import { REPO } from '../data/site'
+
+/** Bump when the policy text changes — not when the page is merely rebuilt. */
+const UPDATED = '7 August 2026'
+
+const title = 'Privacy — ReshapedPDF'
+const description =
+  'What ReshapedPDF does with your documents: nothing. No accounts, no telemetry, no uploads. The short, specific version.'
+---
+<Base title={title} description={description} width="narrow">
+  <header class="slim"><div class="wrap"><a class="brand" href="/"><Mark size={19} /></a></div></header>
+
+  <div class="wrap">
+  
+    <h1>Privacy</h1>
+    <p class="sub">The short version, because there is not much to say.</p>
+  
+    <div class="box">
+      <b>ReshapedPDF has no servers.</b> There is no account to create, no telemetry, no crash
+      reporting, no analytics, and no upload. Your documents are opened, edited and saved on your
+      own machine. We could not read them if we wanted to, because they are never sent anywhere.
+    </div>
+  
+    <h2>The desktop app</h2>
+    <p>
+      Everything happens locally. The app makes no network request of its own — not on launch, not
+      on export, not ever — with the three exceptions below, each of which you start deliberately.
+    </p>
+  
+    <h2>The web app</h2>
+    <p>
+      The browser version is the same code, served as static files. Your PDF is read by the browser
+      itself and never leaves the tab; there is no upload endpoint to send it to. Closing the tab
+      discards everything.
+    </p>
+  
+    <h2>The three times anything leaves your machine</h2>
+    <ul>
+      <li>
+        <b>An AI model you connect.</b> The AI tools are bring-your-own-model. If you point the app
+        at a local model (Ollama, LM Studio) nothing leaves your machine at all. If you point it at
+        a hosted API with your own key, then the crop of the page you are working on is sent to
+        <em>that provider</em>, under your agreement with them — never through us. The endpoint is
+        whatever you typed in, and you can see it in the AI panel at any time.
+      </li>
+      <li>
+        <b>Checking for a new version, if you ask it to.</b> Release downloads are hosted on GitHub;
+        opening that page is an ordinary visit to GitHub and subject to their privacy policy.
+      </li>
+      <li>
+        <b>The list of models, when you open the Ollama setup panel.</b> It fetches the public
+        catalogue of vision models from <code>ollama.com</code> so it can show you what is worth
+        installing and how big each one is. No part of your document is involved — it is the same
+        page anyone can open in a browser — and the panel says <em>live from ollama.com</em> above
+        the list, so it is never happening invisibly. The result is cached on your device for a day.
+        Pick any other provider and this request is not made at all.
+      </li>
+    </ul>
+  
+    <h2>What is stored on your device</h2>
+    <p>
+      Local browser/app storage keeps only your own preferences: the theme, your saved signature,
+      the AI endpoint and model name you entered, and the cached Ollama model list. An API key you type is kept on your device so
+      you do not have to retype it. None of it is transmitted. Clearing site data (web) or deleting
+      the app's support folder (desktop) removes all of it.
+    </p>
+  
+    <h2>This website</h2>
+    <p>
+      Static pages. No cookies, no trackers, no analytics scripts, no embedded third parties — the
+      typefaces are served from this domain rather than from a font CDN, precisely so that visiting
+      this page does not tell anyone else that you did. Your host will keep ordinary server logs.
+    </p>
+  
+    <h2>Your rights</h2>
+    <p>
+      Since no personal data is collected, there is nothing for us to export, correct or delete. If
+      you believe otherwise, or you have any question about the above, write to
+      <a href="mailto:anton.arnaudov.pro@gmail.com">anton.arnaudov.pro@gmail.com</a> and you will get a real answer.
+    </p>
+  
+    
+  </div>
+  <div class="wrap"><footer>
+    ReshapedPDF · <a href="/">Home</a> · <a href={REPO}>Source</a>
+    {/* The date is the point of a privacy page's footer: it is how a reader
+        knows which version of the policy they agreed to. It sits in `updated`
+        so there is one place to change it. */}
+    <div class="updated">Last updated: {UPDATED}</div>
+  </footer></div>
+</Base>
+
+<style is:global>
+  body.page-narrow a{color:var(--ember)}
+  header.slim{border-bottom:1px solid var(--hair);padding:20px 0}
+  header.slim .brand{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-size:19px;font-weight:640;color:var(--ink-bright);text-decoration:none;letter-spacing:-.02em}
+  body.page-narrow h1{font-family:var(--disp);font-size:clamp(30px,5vw,44px);color:var(--ink-bright);letter-spacing:-.025em;line-height:1.1;margin:56px 0 6px}
+  body.page-narrow .sub{color:var(--dim);font-size:17px;margin-bottom:44px}
+  body.page-narrow h2{font-family:var(--disp);font-size:21px;color:var(--ink-bright);font-weight:640;margin:38px 0 10px;letter-spacing:-.01em}
+  body.page-narrow p,body.page-narrow li{font-size:16px}
+  body.page-narrow ul{margin:10px 0 0 20px}
+  body.page-narrow li{margin:7px 0}
+  body.page-narrow code{font-family:var(--mono);font-size:13.5px;background:var(--raised);border:1px solid var(--hair);border-radius:5px;padding:2px 6px;color:var(--ink-bright)}
+  body.page-narrow .box{margin:26px 0;padding:22px 24px;border:1px solid var(--hair-strong);border-radius:13px;background:linear-gradient(180deg,rgba(255,92,31,.05),transparent)}
+  body.page-narrow .box b{color:var(--ink-bright)}
+  body.page-narrow footer{margin:72px 0 60px;padding-top:26px;border-top:1px solid var(--hair);color:var(--faint);font-size:13.5px}
+  body.page-narrow .updated{color:var(--faint);font-size:13.5px;margin-top:8px}
+</style>
