@@ -1,0 +1,57 @@
+.gitignore
+  s_d2ecb15f6febc8::t_0ed4475a11e43f 2-3,5-7
+astro.config.mjs
+  s_d2ecb15f6febc8::t_b53876a599546f 1-19
+package-lock.json
+  s_6e5dc450e2113a::t_9d6ebd57aec1d8 1-5868
+package.json
+  s_d2ecb15f6febc8::t_029077ad4feb41 4-5,7-9,12-14
+scripts/render-og.mjs
+  s_d2ecb15f6febc8::t_72390cf96f7d5b 3,33,67
+scripts/sync-app.sh
+  s_d2ecb15f6febc8::t_e513ae1c9019a9 10,13,32-35
+src/components/DownloadSection.astro
+  s_d2ecb15f6febc8::t_030d244e4a4803 1-96
+src/components/Footer.astro
+  s_d2ecb15f6febc8::t_2564256585d462 1-13
+src/components/Header.astro
+  s_d2ecb15f6febc8::t_f87bd2e7b6fca0 1-22
+src/components/Mark.astro
+  s_d2ecb15f6febc8::t_8b9d074b287a24 1-7
+src/components/Vignette.astro
+  s_d2ecb15f6febc8::t_8c4a26502e5a3e 1-45
+src/data/site.ts
+  s_d2ecb15f6febc8::t_15124f2624fb32 1-93
+src/layouts/Base.astro
+  s_d2ecb15f6febc8::t_4a403116be3946 1-12,18-35,39,41-42
+src/pages/index.astro
+  s_d2ecb15f6febc8::t_488e3c61c0f5ab 1-28,30-38,40-85,119,121-122
+src/pages/privacy.astro
+  s_d2ecb15f6febc8::t_927e4dec4e16ba 1-111
+src/styles/global.css
+  s_d2ecb15f6febc8::t_db003cf44636ac 1-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "dc0ff964688742e851a65d499f4831912001f525",
+  "prompts": {},
+  "sessions": {
+    "s_6e5dc450e2113a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "88173777-993a-4bc3-b1df-b6f62d73fe24",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Anton Arnaudov <anton.arnaudov.me@gmail.com>"
+    },
+    "s_d2ecb15f6febc8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bd977926-fda5-4a29-a234-f089ee9a9a77",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Anton Arnaudov <anton.arnaudov.me@gmail.com>"
+    }
+  }
+}
