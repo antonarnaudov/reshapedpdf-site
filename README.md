@@ -1,4 +1,4 @@
-# reshapedpdf.com
+# ReshapedPDF — the landing page
 
 The landing page for [ReshapedPDF](https://github.com/antonarnaudov/reshapedpdf-app) —
 a free, private PDF editor.
