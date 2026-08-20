@@ -14,45 +14,65 @@ export const REPO = 'https://github.com/antonarnaudov/reshapedpdf-app'
 export const LATEST = `${REPO}/releases/latest`
 export const CONTACT = 'anton.arnaudov.pro@gmail.com'
 
-export interface Platform {
+/**
+ * The download matrix, one column per OS.
+ *
+ * Every button points at the latest-release PAGE, not at individual files:
+ * the app's electron-builder artifactName embeds ${version}, so there is no
+ * stable `releases/latest/download/<file>` URL to link — it would rot the day
+ * after the next release. The moment CI publishes versionless asset names,
+ * these entries grow per-file hrefs and nothing else has to change.
+ */
+export interface DownloadColumn {
   id: 'mac' | 'win' | 'linux'
   name: string
-  /** the download card */
-  formats: string
-  requires: string
-  /** what the browser-detected banner says when this is the guess */
-  pickLabel: string
-  pickBtn: string
-  pickSub: string
+  icon: 'apple' | 'windows' | 'linux'
+  req: string
+  /** the emphasised build on top */
+  primary: { label: string; sub: string }
+  /** the other published formats, as smaller buttons */
+  alts: string[]
+  /** the one-time first-launch hurdle (builds are not code-signed yet) */
+  unblock: { label: string; prompt?: string; cmd?: string }
 }
 
-export const PLATFORMS: Platform[] = [
+export const DOWNLOADS: DownloadColumn[] = [
   {
     id: 'mac',
     name: 'macOS',
-    formats: 'Apple Silicon & Intel · .dmg, .zip',
-    requires: 'macOS 11+',
-    pickLabel: 'Recommended for your Mac',
-    pickBtn: 'Download for macOS',
-    pickSub: 'Apple Silicon and Intel builds are both on the release page · macOS 11+',
-  },
-  {
-    id: 'win',
-    name: 'Windows',
-    formats: 'x64 & ARM64 · .exe installer',
-    requires: 'Windows 10 & 11',
-    pickLabel: 'Recommended for your PC',
-    pickBtn: 'Download for Windows',
-    pickSub: 'x64 and ARM64 installers · Windows 10 & 11',
+    icon: 'apple',
+    req: 'macOS 11 or later',
+    primary: { label: 'Apple Silicon', sub: '.dmg' },
+    alts: ['Intel', '.zip'],
+    unblock: {
+      label: 'Blocked on first open? System Settings → Privacy & Security → Open Anyway — or clear the quarantine:',
+      prompt: '$',
+      cmd: 'xattr -dr com.apple.quarantine /Applications/ReshapedPDF.app',
+    },
   },
   {
     id: 'linux',
     name: 'Linux',
-    formats: '.AppImage (x86-64 & ARM64), .deb (x86-64)',
-    requires: 'glibc 2.28+',
-    pickLabel: 'Recommended for your machine',
-    pickBtn: 'Download for Linux',
-    pickSub: 'AppImage (x86-64 & ARM64) and .deb (x86-64) · glibc 2.28+',
+    icon: 'linux',
+    req: 'glibc 2.28+ · x86-64 · arm64',
+    primary: { label: 'AppImage', sub: 'x86-64 · arm64' },
+    alts: ['.deb (x86-64)'],
+    unblock: {
+      label: 'Make the AppImage executable, then run it:',
+      prompt: '$',
+      cmd: 'chmod +x ReshapedPDF-*.AppImage',
+    },
+  },
+  {
+    id: 'win',
+    name: 'Windows',
+    icon: 'windows',
+    req: 'Windows 11 / 10 · x64 & ARM64',
+    primary: { label: 'x64', sub: '.exe installer' },
+    alts: ['ARM64'],
+    unblock: {
+      label: 'SmartScreen will warn once — “More info” → “Run anyway”.',
+    },
   },
 ]
 

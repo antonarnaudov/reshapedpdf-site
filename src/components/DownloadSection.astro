@@ -1,107 +1,205 @@
 ---
-import { LATEST, PLATFORMS } from '../data/site'
----
-<section class="dl" id="download"><div class="wrap">
-  <div class="sec-label reveal"><b>§ 05</b> get it</div>
-  <h2 class="reveal">On your bench in a minute.</h2>
-  <p class="lede reveal">Free forever for everything local, and open source. No account — the download is the whole onboarding.</p>
+import { LATEST, DOWNLOADS } from '../data/site'
 
-  {/* What you are most likely to want, guessed from your browser and offered
-      first. Everything else stays visible below: a guess that hides the
-      alternatives is worse than no guess. */}
-  <div id="pick" class="pick reveal" hidden>
-    <div class="pick-label" id="pick-label">Recommended for you</div>
-    <a class="btn primary big" id="pick-btn" href={LATEST}>Download</a>
-    <div class="pick-sub" id="pick-sub"></div>
+/* The install section, ported 1:1 from getuncaged.dev's Downloads column
+   design — same grid, dividers, command boxes, copy buttons and mono voice.
+   One deliberate difference: Uncaged's hero slot is a curl-installer one-liner,
+   and ReshapedPDF has no installer script (or domain) to put there — so the
+   hero slot holds the primary download instead, and the command boxes carry
+   the commands that actually exist: the one-time first-launch unblocks. */
+---
+<section class="dl" id="download"><div class="wrap dl-wrap">
+  <div class="dl-head reveal">
+    <p class="dl-eyebrow">§ 05 · install</p>
+    <h2>Get ReshapedPDF.</h2>
+    <p class="dl-sub">
+      macOS, Linux and Windows — free and open source. No account, no license key, nothing to
+      activate.
+    </p>
   </div>
 
-  <div class="grid reveal">
-    {PLATFORMS.map((p) => (
-      <div class="card">
-        <h3>{p.name}</h3>
-        <p set:html={`${p.formats}<br /><span class="dim">${p.requires}</span>`} />
-        <a class="btn ghost" href={LATEST}>Downloads</a>
+  <div class="dl-grid reveal">
+    {DOWNLOADS.map((col) => (
+      <div class="dl-os">
+        <div class="dl-os-head">
+          {col.icon === 'apple' && (
+            <svg class="os-ico" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M16.4 12.8c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.9-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3.1 2.4 1.2 0 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.6-1-2.7-3.7zM14 5.6c.7-.8 1.1-1.9 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4z"></path>
+            </svg>
+          )}
+          {col.icon === 'linux' && (
+            <svg class="os-ico os-ico-tux" width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.866.67 2.616.47.526-.116.97-.464 1.208-.946.587-.003 1.23-.269 2.26-.334.699-.058 1.574.267 2.577.2.025.134.063.198.114.333l.003.003c.391.778 1.113 1.132 1.884 1.071.771-.06 1.592-.536 2.257-1.306.631-.765 1.683-1.084 2.378-1.503.348-.199.629-.469.649-.853.023-.4-.2-.811-.714-1.376v-.097l-.003-.003c-.17-.2-.25-.535-.338-.926-.085-.401-.182-.786-.492-1.046h-.003c-.059-.054-.123-.067-.188-.135a.357.357 0 00-.19-.064c.431-1.278.264-2.55-.173-3.694-.533-1.41-1.465-2.638-2.175-3.483-.796-1.005-1.576-1.957-1.56-3.368.026-2.152.236-6.133-3.544-6.139zm.529 3.405h.013c.213 0 .396.062.584.198.19.135.33.332.438.533.105.259.158.459.166.724 0-.02.006-.04.006-.06v.105a.086.086 0 01-.004-.021l-.004-.024a1.807 1.807 0 01-.15.706.953.953 0 01-.213.335.71.71 0 00-.088-.042c-.104-.045-.198-.064-.284-.133a1.312 1.312 0 00-.22-.066c.05-.06.146-.133.183-.198.053-.128.082-.264.088-.402v-.02a1.21 1.21 0 00-.061-.4c-.045-.134-.101-.2-.183-.333-.084-.066-.167-.132-.267-.132h-.016c-.093 0-.176.03-.262.132a.8.8 0 00-.205.334 1.18 1.18 0 00-.09.4v.019c.002.089.008.179.02.267-.193-.067-.438-.135-.607-.202a1.635 1.635 0 01-.018-.2v-.02a1.772 1.772 0 01.15-.768c.082-.22.232-.406.43-.533a.985.985 0 01.594-.2zm-2.962.059h.036c.142 0 .27.048.399.135.146.129.264.288.344.465.09.199.14.4.153.667v.004c.007.134.006.2-.002.266v.08c-.03.007-.056.018-.083.024-.152.055-.274.135-.393.2.012-.09.013-.18.003-.267v-.015c-.012-.133-.04-.2-.082-.333a.613.613 0 00-.166-.267.248.248 0 00-.183-.064h-.021c-.071.006-.13.04-.186.132a.552.552 0 00-.12.27.944.944 0 00-.023.33v.015c.012.135.037.2.08.334.046.134.098.2.166.268.01.009.02.018.034.024-.07.057-.117.07-.176.136a.304.304 0 01-.131.068 2.62 2.62 0 01-.275-.402 1.772 1.772 0 01-.155-.667 1.759 1.759 0 01.08-.668 1.43 1.43 0 01.283-.535c.128-.133.26-.2.418-.2zm1.37 1.706c.332 0 .733.065 1.216.399.293.2.523.269 1.052.468h.003c.255.136.405.266.478.399v-.131a.571.571 0 01.016.47c-.123.31-.516.643-1.063.842v.002c-.268.135-.501.333-.775.465-.276.135-.588.292-1.012.267a1.139 1.139 0 01-.448-.067 3.566 3.566 0 01-.322-.198c-.195-.135-.363-.332-.612-.465v-.005h-.005c-.4-.246-.616-.512-.686-.71-.07-.268-.005-.47.193-.6.224-.135.38-.271.483-.336.104-.074.143-.102.176-.131h.002v-.003c.169-.202.436-.47.839-.601.139-.036.294-.065.466-.065zm2.8 2.142c.358 1.417 1.196 3.475 1.735 4.473.286.534.855 1.659 1.102 3.024.156-.005.33.018.513.064.646-1.671-.546-3.467-1.089-3.966-.22-.2-.232-.335-.123-.335.59.534 1.365 1.572 1.646 2.757.13.535.16 1.104.021 1.67.067.028.135.06.205.067 1.032.534 1.413.938 1.23 1.537v-.043c-.06-.003-.12 0-.18 0h-.016c.151-.467-.182-.825-1.065-1.224-.915-.4-1.646-.336-1.77.465-.008.043-.013.066-.018.135-.068.023-.139.053-.209.064-.43.268-.662.669-.793 1.187-.13.533-.17 1.156-.205 1.869v.003c-.02.334-.17.838-.319 1.35-1.5 1.072-3.58 1.538-5.348.334a2.645 2.645 0 00-.402-.533 1.45 1.45 0 00-.275-.333c.182 0 .338-.03.465-.067a.615.615 0 00.314-.334c.108-.267 0-.697-.345-1.163-.345-.467-.931-.995-1.788-1.521-.63-.4-.986-.87-1.15-1.396-.165-.534-.143-1.085-.015-1.645.245-1.07.873-2.11 1.274-2.763.107-.065.037.135-.408.974-.396.751-1.14 2.497-.122 3.854a8.123 8.123 0 01.647-2.876c.564-1.278 1.743-3.504 1.836-5.268.048.036.217.135.289.202.218.133.38.333.59.465.21.201.477.335.876.335.039.003.075.006.11.006.412 0 .73-.134.997-.268.29-.134.52-.334.74-.4h.005c.467-.135.835-.402 1.044-.7zm2.185 8.958c.037.6.343 1.245.882 1.377.588.134 1.434-.333 1.791-.765l.211-.01c.315-.007.577.01.847.268l.003.003c.208.199.305.53.391.876.085.4.154.78.409 1.066.486.527.645.906.636 1.14l.003-.007v.018l-.003-.012c-.015.262-.185.396-.498.595-.63.401-1.746.712-2.457 1.57-.618.737-1.37 1.14-2.036 1.191-.664.053-1.237-.2-1.574-.898l-.005-.003c-.21-.4-.12-1.025.056-1.69.176-.668.428-1.344.463-1.897.037-.714.076-1.335.195-1.814.12-.465.308-.797.641-.984l.045-.022zm-10.814.049h.01c.053 0 .105.005.157.014.376.055.706.333 1.023.752l.91 1.664.003.003c.243.533.754 1.064 1.189 1.637.434.598.77 1.131.729 1.57v.006c-.057.744-.48 1.148-1.125 1.294-.645.135-1.52.002-2.395-.464-.968-.536-2.118-.469-2.857-.602-.369-.066-.61-.2-.723-.4-.11-.2-.113-.602.123-1.23v-.004l.002-.003c.117-.334.03-.752-.027-1.118-.055-.401-.083-.71.043-.94.16-.334.396-.4.69-.533.294-.135.64-.202.915-.47h.002v-.002c.256-.268.445-.601.668-.838.19-.201.38-.336.663-.336zm7.159-9.074c-.435.201-.945.535-1.488.535-.542 0-.97-.267-1.28-.466-.154-.134-.28-.268-.373-.335-.164-.134-.144-.333-.074-.333.109.016.129.134.199.2.096.066.215.2.36.333.292.2.68.467 1.167.467.485 0 1.053-.267 1.398-.466.195-.135.445-.334.648-.467.156-.136.149-.267.279-.267.128.016.034.134-.147.332a8.097 8.097 0 01-.69.468zm-1.082-1.583V5.64c-.006-.02.013-.042.029-.05.074-.043.18-.027.26.004.063 0 .16.067.15.135-.006.049-.085.066-.135.066-.055 0-.092-.043-.141-.068-.052-.018-.146-.008-.163-.065zm-.551 0c-.02.058-.113.049-.166.066-.047.025-.086.068-.14.068-.05 0-.13-.02-.136-.068-.01-.066.088-.133.15-.133.08-.031.184-.047.259-.005.019.009.036.03.03.05v.02h.003z"></path></svg>
+          )}
+          {col.icon === 'windows' && (
+            <svg class="os-ico" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M3 5.5L10.5 4.4V11.5H3V5.5ZM3 18.5L10.5 19.6V12.5H3V18.5ZM11.5 19.8L21 21V12.5H11.5V19.8ZM11.5 4.2V11.5H21V3L11.5 4.2Z"></path>
+            </svg>
+          )}
+          <h3>{col.name}</h3>
+        </div>
+
+        <a class="dl-btn dl-btn-primary is-hero" href={LATEST} aria-label={`Download ReshapedPDF for ${col.name} (${col.primary.label})`}>
+          <svg class="dl-btn-ico" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 2.5v7"></path>
+            <path d="M4.75 6.5 8 9.75 11.25 6.5"></path>
+            <path d="M3 13h10"></path>
+          </svg>
+          <span class="dl-btn-label">{col.primary.label}</span>
+          <span class="dl-btn-sub">{col.primary.sub}</span>
+        </a>
+        <div class="dl-btn-alts">
+          {col.alts.map((a) => (
+            <a class="dl-btn dl-btn-alt" href={LATEST} aria-label={`Download ReshapedPDF for ${col.name} (${a})`}>{a}</a>
+          ))}
+        </div>
+
+        <div class="dl-dl">
+          <div class="dl-dl-sep"><span>first launch</span></div>
+          <div class="dl-gk">
+            <p class="dl-gk-label">{col.unblock.label}</p>
+            {col.unblock.cmd && (
+              <div class="dl-cmd dl-cmd-mini">
+                <code><span class="dl-cmd-p">{col.unblock.prompt}</span>{col.unblock.cmd}</code>
+                <button class="copy-btn" type="button" data-copy={col.unblock.cmd} aria-label={`Copy the ${col.name} unblock command`}>copy</button>
+              </div>
+            )}
+          </div>
+          <p class="dl-req">{col.req}</p>
+        </div>
       </div>
     ))}
   </div>
 
-  <p class="note center reveal" id="webapp-line">
-    <span id="webapp" hidden>Or skip the install: the <a href="/app/" class="ember-link">web app</a> is the same editor, in your browser, files still on your machine.<br /></span>
-    Every installer is built by CI from the public repository, with <code>SHA256SUMS.txt</code> beside
-    it on the release page — the FAQ shows how to verify.
+  <p class="dl-foot reveal">
+    <span id="webapp" hidden>Or skip the install: the <a href="/app/">web app</a> is the same editor, in your browser, files still on your machine.<br /></span>
+    The builds are not code-signed yet — certificates are on the list; a free tool today beat waiting
+    for them. Every installer is built by CI from the public repository and lands on the
+    <a href={LATEST}>releases page</a> with <code>SHA256SUMS.txt</code> beside it — the FAQ shows how
+    to verify.
   </p>
 
-  <div class="signing reveal">
-    <div class="signing-h"><span class="reg"></span>The builds are not code-signed yet — your system will stop you once</div>
-    <div class="signing-cols">
-      <p><b>macOS 15+</b> — open it, let it be blocked, then System&nbsp;Settings → Privacy&nbsp;&amp;&nbsp;Security → <b>Open&nbsp;Anyway</b> (Apple removed the right-click trick). Or: <code>xattr -dr com.apple.quarantine /Applications/ReshapedPDF.app</code></p>
-      <p><b>macOS 14 and earlier</b> — right-click the app → Open → Open.</p>
-      <p><b>Windows</b> — SmartScreen → “More info” → “Run anyway”.</p>
-      <p><b>Linux</b> — <code>chmod +x ReshapedPDF-*.AppImage</code></p>
-    </div>
-    <p class="signing-f">Signing certificates are on the list; a free tool today beat waiting for them.</p>
-  </div>
+  <div id="copy-live" class="visually-hidden" aria-live="polite"></div>
 </div></section>
 
 {/* is:inline so Astro ships these byte for byte rather than bundling them —
-    this page has no JavaScript build step and should not acquire one for two
-    dozen lines. The strings come from the same data the cards above use, so the
-    banner and the card can no longer disagree about what is published. */}
-<script is:inline define:vars={{ LATEST, PLATFORMS }}>
-  // Offer the right build first. The platform is a guess — navigator tells you
-  // the OS and, on Apple Silicon, nothing reliable about the architecture — so
-  // the guess names itself and the full list stays visible underneath it.
+    this page has no JavaScript build step and should not acquire one for a few
+    dozen lines: the copy buttons, the terminal-line overflow cue, and the
+    web-app link that only appears when /app is actually deployed. */}
+<script is:inline>
   ;(function () {
-    var ua = navigator.userAgent, p = navigator.platform || ''
-    var by = function (id) { return PLATFORMS.find(function (x) { return x.id === id }) }
-    var picks = null
-    if (/Mac/i.test(p) || /Mac OS X/i.test(ua)) picks = by('mac')
-    else if (/Win/i.test(p) || /Windows/i.test(ua)) picks = by('win')
-    // Android reports platform "Linux armv8l", so without the second test a
-    // phone is offered a desktop AppImage it cannot run.
-    else if ((/Linux/i.test(p) || /X11/i.test(ua)) && !/Android|Mobile/i.test(ua)) picks = by('linux')
+    var live = document.getElementById('copy-live')
+    var announce = function (msg) {
+      if (!live) return
+      live.textContent = ''
+      requestAnimationFrame(function () { live.textContent = msg })
+    }
 
-    var box = document.getElementById('pick')
-    if (!picks || !box) return
-    document.getElementById('pick-label').textContent = picks.pickLabel
-    var b = document.getElementById('pick-btn')
-    b.textContent = picks.pickBtn; b.href = LATEST
-    document.getElementById('pick-sub').textContent = picks.pickSub
-    box.hidden = false
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var text = btn.getAttribute('data-copy') || ''
+        navigator.clipboard.writeText(text).then(function () {
+          btn.textContent = 'copied'
+          btn.classList.add('copied')
+          announce('Command copied to clipboard')
+          setTimeout(function () {
+            btn.textContent = 'copy'
+            btn.classList.remove('copied')
+          }, 1400)
+        }, function () {
+          btn.textContent = 'select & copy'
+        })
+      })
+    })
+
+    // command strings never wrap — when one is clipped, flag it so CSS can
+    // fade the cut edge (the scroll affordance of a real terminal line)
+    var cmds = document.querySelectorAll('.dl-cmd > code')
+    var flagOverflow = function () {
+      cmds.forEach(function (el) {
+        el.classList.toggle('is-overflowing', el.scrollWidth > el.clientWidth + 1)
+      })
+    }
+    flagOverflow()
+    window.addEventListener('resize', flagOverflow, { passive: true })
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(flagOverflow)
+
+    // The browser editor is assembled into /app by scripts/sync-app.sh. If this
+    // deployment does not have it, say nothing rather than offer a dead link.
+    fetch('/app/index.html', { method: 'HEAD' })
+      .then(function (r) { if (r.ok) document.getElementById('webapp').hidden = false })
+      .catch(function () {})
   })()
-
-  // The browser editor is assembled into /app by scripts/sync-app.sh. If this
-  // deployment does not have it, say nothing rather than offer a dead link.
-  fetch('/app/index.html', { method: 'HEAD' })
-    .then(function (r) { if (r.ok) document.getElementById('webapp').hidden = false })
-    .catch(function () {})
 </script>
 
 <style>
   .dl{padding:104px 0;background:var(--bench);border-block:1px solid var(--hair)}
-  .pick{text-align:center;margin:46px 0 10px}
-  .pick-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
-  :global(.btn.big){font-size:16.5px;height:54px;padding:0 34px;border-radius:13px}
-  .pick-sub{font-size:12.5px;color:var(--dim);margin-top:10px}
+  .dl-wrap{display:flex;flex-direction:column;align-items:center}
 
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px}
-  .card{background:var(--raised);border:1px solid var(--hair);border-radius:14px;padding:24px;text-align:center}
-  .card h3{font-family:var(--disp);font-size:17px;color:var(--ink-bright);font-weight:640;margin-bottom:8px}
-  .card p{font-size:13px;color:var(--dim);line-height:1.65}
-  .card :global(.btn){margin-top:14px;height:38px;font-size:13.5px}
-  :global(.dim){color:var(--faint);font-size:12px}
+  .dl-head{text-align:center;display:flex;flex-direction:column;align-items:center;margin-bottom:60px}
+  .dl-eyebrow{display:flex;align-items:baseline;justify-content:center;gap:10px;font-family:var(--mono);font-size:13px;font-weight:500;color:var(--dim);letter-spacing:.02em;margin-bottom:18px}
+  .dl-eyebrow::before{content:'\276f';color:var(--ember);font-weight:700}
+  .dl-head h2{margin-top:0;max-width:none}
+  .dl-sub{color:var(--dim);max-width:52ch;margin-top:18px;font-size:17px}
 
-  .note{font-size:13px;color:var(--dim);line-height:1.75;margin-top:26px}
-  .note.center{text-align:center;max-width:640px;margin-left:auto;margin-right:auto}
-  .ember-link{color:var(--ember)}
+  .dl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;width:100%;margin-bottom:44px}
+  .dl-os{display:flex;flex-direction:column;padding:4px 30px}
+  /* flex-column items must be allowed to shrink below their content width —
+     without this the nowrap command rows refuse to shrink and bleed across
+     the column dividers */
+  .dl-os > *{min-width:0}
+  .dl-os:first-child{padding-left:0}
+  .dl-os:last-child{padding-right:0}
+  .dl-os + .dl-os{border-left:1px solid var(--hair)}
 
-  .signing{margin:38px auto 0;max-width:860px;border:1px dashed var(--hair-strong);border-radius:14px;padding:22px 26px;background:var(--inset)}
-  .signing-h{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink);margin-bottom:14px}
-  .signing-h .reg{color:var(--ember)}
-  .signing-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px 28px}
-  .signing-cols p{font-size:12.5px;color:var(--dim);line-height:1.7}
-  .signing-cols b{color:var(--ink)}
-  .signing-f{margin-top:14px;font-size:11.5px;color:var(--faint)}
+  .dl-os-head{display:flex;align-items:center;gap:10px;color:var(--ink-bright);margin-bottom:20px}
+  .os-ico{flex-shrink:0}
+  .dl-os-head h3{font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--ink-bright)}
 
-  @media(max-width:840px){.grid{grid-template-columns:1fr}.signing-cols{grid-template-columns:1fr}}
+  .dl-btn{display:inline-flex;align-items:center;border-radius:8px;font-family:var(--mono);transition:color .14s ease,border-color .14s ease,background .14s ease,transform .14s ease}
+  .dl-btn-primary{gap:10px;width:100%;padding:12px 14px;border:1px solid var(--hair-strong);background:var(--raised);color:var(--ink-bright);font-size:13px;font-weight:700}
+  .dl-btn-primary:hover{border-color:var(--dim);background:var(--inset);transform:translateY(-1px)}
+  /* the hero slot — the recommended, emphasised path (sits on top) */
+  .dl-btn-primary.is-hero{border-color:rgba(255,92,31,.45);background:linear-gradient(180deg,rgba(255,92,31,.06),var(--raised) 60%);box-shadow:0 8px 26px -14px rgba(255,92,31,.6)}
+  .dl-btn-ico{color:var(--dim);flex-shrink:0;transition:color .14s ease}
+  .dl-btn-primary:hover .dl-btn-ico{color:var(--ember)}
+  .dl-btn-sub{margin-left:auto;font-size:11px;font-weight:500;color:var(--faint)}
+
+  .dl-btn-alts{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px}
+  .dl-btn-alt{flex:1 1 auto;justify-content:center;padding:8px 12px;border:1px solid var(--hair-strong);background:var(--inset);color:var(--dim);font-size:11.5px;font-weight:600;white-space:nowrap}
+  .dl-btn-alt:hover{color:var(--ink-bright);border-color:var(--dim)}
+
+  .dl-dl{margin-top:4px}
+  .dl-dl-sep{display:flex;align-items:center;gap:12px;margin:18px 0 14px}
+  .dl-dl-sep::before,.dl-dl-sep::after{content:'';flex:1;height:1px;background:var(--hair)}
+  .dl-dl-sep span{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+
+  /* the one-time unblock, because the builds carry no signature yet */
+  .dl-gk-label{font-family:var(--mono);font-size:11.5px;line-height:1.6;color:var(--dim);margin-bottom:7px}
+  .dl-cmd{display:flex;align-items:center;gap:10px;background:var(--inset);border:1px solid var(--hair-strong);border-radius:8px;padding:10px 10px 10px 13px}
+  .dl-cmd-mini{padding:7px 7px 7px 11px}
+  /* one line, always — a clipped command scrolls (with a fade cue) rather
+     than breaking mid-word. `.is-overflowing` comes from the inline script. */
+  .dl-cmd code{flex:1;min-width:0;font-family:var(--mono);font-size:10.5px;line-height:1.55;color:var(--ink);white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+  .dl-cmd code::-webkit-scrollbar{display:none}
+  .dl-cmd code:global(.is-overflowing){-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+  .dl-cmd-p{color:var(--ember);font-weight:700;user-select:none;margin-right:8px}
+
+  .copy-btn{flex-shrink:0;font-family:var(--mono);font-size:11px;font-weight:500;color:var(--dim);background:var(--bench);border:1px solid var(--hair-strong);border-radius:7px;padding:5px 9px;cursor:pointer;transition:color .14s ease,border-color .14s ease}
+  .copy-btn:hover{color:var(--ink-bright);border-color:var(--dim)}
+  .copy-btn:global(.copied){color:var(--ember);border-color:var(--ember)}
+
+  .dl-req{margin:14px 0 0;padding-left:2px;font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+
+  .dl-foot{text-align:center;font-size:13px;color:var(--dim);max-width:72ch;line-height:1.75}
+  .dl-foot a{font-family:var(--mono);font-size:12.5px;color:var(--dim);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--hair-strong);white-space:nowrap}
+  .dl-foot a:hover{color:var(--ember);text-decoration-color:var(--ember)}
+  .dl-foot code{color:var(--ink)}
+
+  .visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  @media(max-width:980px){
+    .dl-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+    .dl-os,.dl-os:first-child,.dl-os:last-child{padding:0}
+    .dl-os + .dl-os{border-left:0;border-top:1px solid var(--hair);padding-top:36px}
+  }
 </style>
